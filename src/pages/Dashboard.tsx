@@ -10,19 +10,18 @@ import {
   Clock, 
   Package,
   Truck,
-  Settings,
   LogOut
 } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [routeStatus] = useState("ativa");
+  
 
   const routePoints = [
-    { id: 1, type: "entrega", address: "Rua das Flores, 123 - Centro", status: "pendente", time: "09:00" },
-    { id: 2, type: "coleta", address: "Av. Principal, 456 - Zona Norte", status: "concluido", time: "10:30" },
-    { id: 3, type: "entrega", address: "Rua do Comércio, 789 - Zona Sul", status: "pendente", time: "14:00" },
-    { id: 4, type: "entrega", address: "Est. da Serra, 321 - Zona Oeste", status: "pendente", time: "16:30" },
+    { id: 1, sequence: 1, type: "entrega", address: "Rua das Flores, 123 - Centro", status: "pendente", time: "09:00" },
+    { id: 2, sequence: 2, type: "coleta", address: "Av. Principal, 456 - Zona Norte", status: "concluido", time: "10:30" },
+    { id: 3, sequence: 3, type: "entrega", address: "Rua do Comércio, 789 - Zona Sul", status: "pendente", time: "14:00" },
+    { id: 4, sequence: 4, type: "entrega", address: "Est. da Serra, 321 - Zona Oeste", status: "pendente", time: "16:30" },
   ];
 
   const getStatusColor = (status: string) => {
@@ -58,18 +57,12 @@ const Dashboard = () => {
           <div>
             <h1 className="text-xl font-bold">Rota SP-001</h1>
             <div className="flex items-center gap-2">
-              <Badge variant={routeStatus === "ativa" ? "default" : "secondary"}>
-                {routeStatus === "ativa" ? "Ativa" : "Pausada"}
-              </Badge>
               <span className="text-sm text-muted-foreground">João Silva</span>
             </div>
           </div>
         </div>
         
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon">
-            <Settings className="w-5 h-5" />
-          </Button>
           <Button 
             variant="ghost" 
             size="icon"
@@ -85,19 +78,19 @@ const Dashboard = () => {
         <Card className="text-center">
           <CardContent className="pt-4">
             <div className="text-2xl font-bold text-primary">6</div>
-            <div className="text-sm text-muted-foreground">Total</div>
+            <div className="text-sm text-muted-foreground">Total de Paradas</div>
           </CardContent>
         </Card>
         <Card className="text-center">
           <CardContent className="pt-4">
             <div className="text-2xl font-bold text-success">2</div>
-            <div className="text-sm text-muted-foreground">Concluídos</div>
+            <div className="text-sm text-muted-foreground">Paradas Concluídas</div>
           </CardContent>
         </Card>
         <Card className="text-center">
           <CardContent className="pt-4">
             <div className="text-2xl font-bold text-warning">4</div>
-            <div className="text-sm text-muted-foreground">Pendentes</div>
+            <div className="text-sm text-muted-foreground">Paradas Pendentes</div>
           </CardContent>
         </Card>
       </div>
@@ -110,6 +103,11 @@ const Dashboard = () => {
         <CardContent className="space-y-3">
           {routePoints.map((point) => (
             <div key={point.id} className="flex items-center gap-3 p-3 rounded-lg border">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                  <span className="text-sm font-bold text-primary">{point.sequence}</span>
+                </div>
+              </div>
               <div className="flex-shrink-0">
                 {getStatusIcon(point.status)}
               </div>
@@ -143,6 +141,16 @@ const Dashboard = () => {
       {/* Actions */}
       <div className="space-y-3">
         <Button 
+          onClick={() => navigate("/occurrence")}
+          className="w-full"
+          size="xl"
+          variant="accent"
+        >
+          <AlertTriangle className="w-6 h-6" />
+          Registrar Ocorrência
+        </Button>
+        
+        <Button 
           onClick={() => navigate("/delivery-confirmation")}
           className="w-full"
           size="xl"
@@ -150,19 +158,6 @@ const Dashboard = () => {
         >
           <Package className="w-5 h-5" />
           Confirmar Entregas
-        </Button>
-      </div>
-
-      {/* Fixed Emergency Button */}
-      <div className="fixed bottom-6 left-4 right-4">
-        <Button 
-          onClick={() => navigate("/occurrence")}
-          className="w-full shadow-lg"
-          size="xl"
-          variant="accent"
-        >
-          <AlertTriangle className="w-6 h-6" />
-          Registrar Ocorrência
         </Button>
       </div>
     </div>

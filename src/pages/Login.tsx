@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { QrCode, Lock, Truck } from "lucide-react";
+import { Lock, Truck } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const Login = () => {
@@ -11,13 +11,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleQRScan = () => {
-    // Simular leitura de QR code
-    toast({
-      title: "QR Code lido",
-      description: "Redirecionado para inserir token",
-    });
-  };
 
   const handleTokenSubmit = async () => {
     if (!token.trim()) {
@@ -64,27 +57,6 @@ const Login = () => {
           </div>
         </div>
 
-        {/* QR Code Scanner */}
-        <Card className="card-elevated">
-          <CardHeader className="text-center">
-            <CardTitle className="text-lg flex items-center justify-center gap-2">
-              <QrCode className="w-5 h-5" />
-              Scanner QR Code da Rota
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Button 
-              onClick={handleQRScan}
-              className="w-full"
-              size="xl"
-              variant="accent"
-            >
-              <QrCode className="w-5 h-5" />
-              Escanear QR Code
-            </Button>
-          </CardContent>
-        </Card>
-
         {/* Token Input */}
         <Card className="card-elevated">
           <CardHeader className="text-center">
@@ -103,9 +75,6 @@ const Login = () => {
                 className="text-center text-lg h-12"
                 maxLength={6}
               />
-              <p className="text-sm text-muted-foreground text-center">
-                Token relacionado ao seu CPF
-              </p>
             </div>
             
             <Button 
