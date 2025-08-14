@@ -18,21 +18,21 @@ import {
 import { toast } from "@/hooks/use-toast";
 
 const occurrenceTypes = [
-  { id: "pneu", label: "Pneu Furado", icon: "🛞" },
-  { id: "combustivel", label: "Falta de Combustível", icon: "⛽" },
-  { id: "fiscal", label: "Parada Fiscal", icon: "🚦" },
-  { id: "atraso", label: "Atraso na Rota", icon: "⏰" },
-  { id: "acidente", label: "Acidente", icon: "🚨" },
-  { id: "mecanico", label: "Problema Mecânico", icon: "🔧" },
-  { id: "clima", label: "Condições Climáticas", icon: "🌧️" },
-  { id: "outros", label: "Outros", icon: "❓" },
+  { id: "pneu", label: "Pneu Furado" },
+  { id: "combustivel", label: "Falta de Combustível" },
+  { id: "fiscal", label: "Parada Fiscal" },
+  { id: "atraso", label: "Atraso na Rota" },
+  { id: "acidente", label: "Acidente" },
+  { id: "mecanico", label: "Problema Mecânico" },
+  { id: "clima", label: "Condições Climáticas" },
+  { id: "outros", label: "Outros" },
 ];
 
 const Occurrence = () => {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState("");
   const [description, setDescription] = useState("");
-  const [additionalComment, setAdditionalComment] = useState("");
+  
   const [images, setImages] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -111,7 +111,6 @@ const Occurrence = () => {
                     : "border-border hover:border-primary/50"
                 }`}
               >
-                <div className="text-lg mb-1">{type.icon}</div>
                 <div className="text-sm font-medium">{type.label}</div>
               </button>
             ))}
@@ -133,17 +132,6 @@ const Occurrence = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="mt-2 min-h-[100px]"
-            />
-          </div>
-          
-          <div>
-            <Label htmlFor="comment">Comentário adicional (opcional)</Label>
-            <Textarea
-              id="comment"
-              placeholder="Informações extras sobre a situação..."
-              value={additionalComment}
-              onChange={(e) => setAdditionalComment(e.target.value)}
-              className="mt-2"
             />
           </div>
         </CardContent>

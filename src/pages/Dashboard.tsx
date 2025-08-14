@@ -95,6 +95,19 @@ const Dashboard = () => {
         </Card>
       </div>
 
+      {/* Emergency Action */}
+      <div className="mb-6">
+        <Button 
+          onClick={() => navigate("/occurrence")}
+          className="w-full"
+          size="xl"
+          variant="accent"
+        >
+          <AlertTriangle className="w-6 h-6" />
+          Registrar Ocorrência
+        </Button>
+      </div>
+
       {/* Route Points */}
       <Card className="mb-6">
         <CardHeader>
@@ -138,18 +151,8 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* Actions */}
+      {/* Secondary Action */}
       <div className="space-y-3">
-        <Button 
-          onClick={() => navigate("/occurrence")}
-          className="w-full"
-          size="xl"
-          variant="accent"
-        >
-          <AlertTriangle className="w-6 h-6" />
-          Registrar Ocorrência
-        </Button>
-        
         <Button 
           onClick={() => navigate("/delivery-confirmation")}
           className="w-full"
