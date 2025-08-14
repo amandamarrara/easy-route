@@ -151,18 +151,6 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      {/* Secondary Action */}
-      <div className="space-y-3">
-        <Button 
-          onClick={() => navigate("/delivery-confirmation")}
-          className="w-full"
-          size="xl"
-          variant="secondary"
-        >
-          <Package className="w-5 h-5" />
-          Confirmar Entregas
-        </Button>
-      </div>
     </div>
   );
 };
